@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
+import dotenv from "dotenv";
 
 import session from "express-session";
 import connectMongoDB from "connect-mongo";
@@ -10,10 +11,10 @@ import userRouter from "./router/userRouter.js";
 import taskRouter from "./router/taskRouter.js";
 
 const app = express();
-const port = 3000;
+dotenv.config();
+const port = process.env.PORT;
 
-const mongoDB =
-  "mongodb+srv://jomermsanandres_db_user:IYhDqjTElaCUD64G@cluster0.gtgwrhf.mongodb.net/todoDB?appName=Cluster0";
+const mongoDB = process.env.MONGODB_URL;
 
 app.use(express.json());
 app.use(
@@ -31,7 +32,7 @@ const mongoDBSession = connectMongoDB.create({
 app.use(
   session({
     name: "todo.sid",
-    secret: "session-key",
+    secret: process.env.SECRET_KEY,
     resave: false,
     saveUninitialized: false,
     store: mongoDBSession,
