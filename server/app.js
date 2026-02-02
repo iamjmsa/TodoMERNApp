@@ -3,6 +3,7 @@ import cors from "cors";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 
+// * session
 import session from "express-session";
 import connectMongoDB from "connect-mongo";
 
